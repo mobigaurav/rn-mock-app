@@ -27,8 +27,6 @@ const mockSuccess = (value: SuccessValue): Promise<SuccessValue> => {
     return new Promise(resolve => {
         setTimeout(() => resolve(value), 2000)
     })
-
-   
 }
 
 const mockFailure = (value: FailureValue): Promise<FailureValue> => {

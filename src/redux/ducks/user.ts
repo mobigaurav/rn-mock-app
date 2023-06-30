@@ -59,6 +59,7 @@ export const attemptSignUp = createAction(
 export const selectLogin = (state: RootState): boolean => state.user.login
 export const selectIsSubmitting = (state: RootState): boolean => state.user.loginState === 'loading'
 export const selectLoginMessage = (state: RootState): string | undefined => state.user.message
+export const selectEmail = (state:RootState):string | undefined => state.user.email
 
 export const userMiddleware: Middleware = ({ dispatch }) => next => action => {
     next(action)

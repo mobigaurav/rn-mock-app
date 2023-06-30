@@ -15,6 +15,7 @@ export enum MainRoutes {
     AppLoading = 'AppLoading', // Load User Data for signed in users
     Home = 'Home', // The first "real" page of the app
     Settings = 'Settings', // Default Settings Page
+    Chat = 'Chat', // Default Settings Page
 }
 
 export enum HomeRoutes {
@@ -36,6 +37,7 @@ export type MainStackParamList = {
    [MainRoutes.AppLoading]: undefined
    [MainRoutes.Home]: { update: boolean } | undefined // just an example, "update" will later be used for version checks
    [MainRoutes.Settings]: undefined
+   [MainRoutes.Chat]:undefined
 }
 
 export type HomeTabsParamList = {

@@ -6,6 +6,7 @@ import { setLogin } from '../../redux/ducks/user'
 import { useFocusEffect } from '@react-navigation/native'
 import { MainRoutes } from '../../routing/routes'
 import { MainNavigationProp } from '../../routing/types'
+import LottieView from 'lottie-react-native';
 
 type SplashScreenProps = {
     navigation: MainNavigationProp<MainRoutes.Splash>
@@ -16,6 +17,8 @@ const SplashScreen = ({ navigation }: SplashScreenProps): React.ReactElement => 
         () => navigation.navigate(MainRoutes.AppCheck),
         [navigation],
     )
+
+    const lottieSrc = require("../../resources/lottie_refresh.json");
 
     useFocusEffect(
         useCallback(() => {
@@ -30,16 +33,12 @@ const SplashScreen = ({ navigation }: SplashScreenProps): React.ReactElement => 
     return (
         <TouchableWithoutFeedback onPress={() => navigate()}>
              <View style={styles.page}>
-                <View style={styles.titleBox}>
-                    <Text>ALL BITS EQUAL</Text>
-                    <Text>presents</Text>
-                    <Text>The Expo Starter Kit</Text>
-                </View>
-                <View style={styles.contentBox}>
-                    <Text>stay legendary</Text>
-                </View>
                 <View style={styles.footer}>
-                    <Text>written by Konrad Abe</Text>
+                <LottieView
+                source={lottieSrc}
+                loop={false}
+                autoPlay
+            />
                 </View>
             </View>
         </TouchableWithoutFeedback>
@@ -49,7 +48,7 @@ const SplashScreen = ({ navigation }: SplashScreenProps): React.ReactElement => 
 const styles = StyleSheet.create({
     page: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#2C5364',
         alignItems: 'center',
         justifyContent: 'center',
     },

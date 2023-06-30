@@ -31,7 +31,7 @@ const AppLoadingScreen = (): React.ReactElement => {
 const styles = StyleSheet.create({
     page: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#2C5364',
         alignItems: 'center',
         justifyContent: 'center',
     },

@@ -15,6 +15,7 @@ import HomeScreen from '../screens/AppStack/HomeScreen'
 import HomeScreenB from '../screens/AppStack/HomeScreenB'
 import HomeScreenC from '../screens/AppStack/HomeScreenC'
 import SettingsScreen from '../screens/AppStack/SettingsScreen'
+import Chat from '../screens/ChatStack/Chat'
 
 const Home = () => (
     <HomeTabs.Navigator>
@@ -38,6 +39,7 @@ const MainNavigation = (): React.ReactElement => {
                     <>
                         <MainStack.Screen name={MainRoutes.Home} component={Home} />
                         <MainStack.Screen name={MainRoutes.Settings} component={SettingsScreen} />
+                        <MainStack.Screen name={MainRoutes.Chat} component={Chat} />
                     </>
                 ) : (
                     <>
