@@ -66,9 +66,6 @@ export const userMiddleware: Middleware = ({ dispatch }) => next => action => {
    
     if (attemptLogin.match(action)) {
         const { email, password } = action.payload
-        console.log('email', email);
-        console.log('password', password);
-        
         login(email, password)
             .then(() => dispatch(setLogin(email, false)))
             .then(() => dispatch(setRunning(true)))
@@ -77,9 +74,6 @@ export const userMiddleware: Middleware = ({ dispatch }) => next => action => {
 
     if (attemptSignUp.match(action)) {
         const { email, password } = action.payload
-        console.log('attemptSignUp email', email);
-        console.log('attemptSignUp password', password);
-        
         createAccount(email, password)
             .then(() => dispatch(setLogin(email, true)))
             .catch(err => dispatch(setLogout('denied', err.message)))
