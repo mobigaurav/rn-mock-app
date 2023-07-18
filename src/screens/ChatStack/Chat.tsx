@@ -1,56 +1,56 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View, TextInput, Text, FlatList, TouchableOpacity } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import ChatComponent from "../../components/demo/ChatComponent";
 import { styles } from "../../utils/styles";
-import { selectEmail, selectLogin } from "../../redux/ducks/user";
-import { useReduxSelector } from "../../redux";
+import { selectEmail } from "../../redux/ducks/user";
+import { useReduxDispatch, useReduxSelector } from "../../redux";
+import { fetchChatData } from '../../redux/ducks/chatData';
+import { getChatReponse } from "../../redux/ducks/chatData";
 
 const Chat = () => {
-    const [chatMessages, setChatMessages] = useState([
-        {
-            id: `${Math.random()}`,
-            text: "Hello guys, welcome!",
-            time: "07:50",
-            user: "Tomer",
-        },
-        {
-            id: `${Math.random()}`,
-            text: "Hi Tomer, thank you! 😇",
-            time: "08:50",
-            user: "David",
-        },
-        {
-            id: `${Math.random()}`,
-            text: "Whats up guys 😇",
-            time: "08:50",
-            user: "A@b.com",
-        },
-    ]);
-    //const [chatMessages, setChatMessages] = useState([]);
+    const [chatMessages, setChatMessages] = useState<any[] | []>([])
     const [message, setMessage] = useState("");
-    const [user, setUser] = useState("");
     const getUsername = useReduxSelector(selectEmail);
     const todoInput = useRef<HTMLInputElement>(null);
-    // Set the height of every item of the list, to improve perfomance and later use in the getItemLayout
-   const ITEM_HEIGHT = 100;
-
+    const dispatch = useReduxDispatch()
+  
    // The variable that will hold the reference of the FlatList
-   const flatListRef = React.useRef<FlatList>(null);
+   const flatListRef = useRef<any>();
 
-   // The effect that will always run whenever there's a change to the data
-   useLayoutEffect(() => {
-    const timeout = setTimeout(() => {
-      if (flatListRef.current && chatMessages && chatMessages.length > 0) {
-        flatListRef.current.scrollToEnd({ animated: true });
-      }
-    }, 1000);
+   const chatResponse = useReduxSelector(getChatReponse)
 
-    return () => {
-      clearTimeout(timeout);
-    };
+   useEffect(() => {
+    if(chatResponse != "") {
+        console.log("chat response is", chatResponse)
+        console.log("chat message is", message)
+        const hour =
+        new Date().getHours() < 10
+            ? `0${new Date().getHours()}`
+            : `${new Date().getHours()}`;
+    
+        const mins =
+        new Date().getMinutes() < 10
+            ? `0${new Date().getMinutes()}`
+            : `${new Date().getMinutes()}`;
+    
+        const time = hour + ":" + mins;
+        const newIdValue = `${Math.random()}`;
+        const newValueReceived = {
+            id: newIdValue,
+            text: chatResponse,
+            time: time,
+            user: "Bot",
+        }
+    
+        setChatMessages(prevArray => [...prevArray, newValueReceived])
+    }
+   }, [chatResponse])
 
-   }, [chatMessages]);
+   const initiateChatCall = () => {
+
+    dispatch(fetchChatData(message))      
+    setMessage("")
+   }
 
     /*👇🏻 
         This function gets the time the user sends a message, then 
@@ -67,7 +67,7 @@ const Chat = () => {
                     ? `0${new Date().getMinutes()}`
                     : `${new Date().getMinutes()}`;
             
-            const time = hour + mins;
+            const time = hour + ":" + mins;
     
             const newId = `${Math.random()}`;
             const newValue = {
@@ -77,21 +77,8 @@ const Chat = () => {
                 user: getUsername!,
             }
 
-            setChatMessages(prevArray => [...prevArray, newValue])
-            setMessage("");
-            console.log("Message is", message);
-            setTimeout(() => {
-                const newIdValue = `${Math.random()}`;
-                const newValueReceived = {
-                    id: newIdValue,
-                    text: "Hi Tomer, thank you! 😇",
-                    time: time,
-                    user: "David",
-                }
-        
-                setChatMessages(prevArray => [...prevArray, newValueReceived])
-            }, 5000)
-           
+            setChatMessages(chatMessages => [...chatMessages, newValue]);
+            initiateChatCall() 
         };
 
         return (
@@ -106,9 +93,8 @@ const Chat = () => {
                         <FlatList
                             data={chatMessages}
                             ref={flatListRef}
-                            getItemLayout={(data, index) => {
-                                    return { length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index };
-                            }}
+                            onContentSizeChange={() => flatListRef.current.scrollToEnd() }
+                            onLayout={() => flatListRef.current.scrollToEnd() }
                             renderItem={({ item }) => (
                                 <ChatComponent item={item} username={getUsername} />
                             )}
@@ -141,3 +127,5 @@ const Chat = () => {
 }
 
 export default Chat;
+
+
