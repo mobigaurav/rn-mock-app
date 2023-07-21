@@ -23,7 +23,7 @@ const userDataSlice = createSlice({
           state.userDataState = 'loading'
     },
     fetchUsersDataSuccess: (state,action) => {
-        console.log("lets change the status and assign value of users", action.payload)
+       // console.log("lets change the status and assign value of users", action.payload)
         state.users = action.payload
         state.userDataState = 'successful'
     },

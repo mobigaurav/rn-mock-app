@@ -19,9 +19,9 @@ import Chat from '../screens/ChatStack/Chat'
 
 const Home = () => (
     <HomeTabs.Navigator>
-        <HomeTabs.Screen name={HomeRoutes.HomeA} component={HomeScreen} />
+        <HomeTabs.Screen name={HomeRoutes.HomeA} component={Chat} />
         <HomeTabs.Screen name={HomeRoutes.HomeB} component={HomeScreenB} />
-        <HomeTabs.Screen name={HomeRoutes.HomeC} component={HomeScreenC} />
+        {/* <HomeTabs.Screen name={HomeRoutes.HomeC} component={HomeScreenC} /> */}
     </HomeTabs.Navigator>
 )
 

@@ -1,7 +1,7 @@
-import { createSlice, nanoid, createAsyncThunk, createAction } from "@reduxjs/toolkit";
+import { createSlice, nanoid, createAsyncThunk, createAction, createSelector } from "@reduxjs/toolkit";
 import { RootState } from '../index';
 
-type ChatDataState = 'loading' | 'denied' | 'successful'
+type ChatDataState = 'init' |'loading' | 'denied' | 'successful'
 
 type chatDataState = {
     chatResponse : string,
@@ -12,7 +12,7 @@ type chatDataState = {
 const initialState:chatDataState = {
   chatResponse: '',
   error:null,
-  chatDataState: 'loading'
+  chatDataState: 'init'
 };
 
 const chatDataSlice = createSlice({
@@ -23,9 +23,9 @@ const chatDataSlice = createSlice({
           state.chatDataState = 'loading'
     },
     fetchChatDataSuccess: (state,action) => {
-        console.log("lets change the status and assign value of users", action.payload)
-        state.chatResponse = action.payload
-        state.chatDataState = 'successful'
+        //console.log("lets change the status and assign value of users", action.payload)
+          state.chatResponse = action.payload
+          state.chatDataState = 'successful'
     },
     fetchChatDataFailure: (state, action) => {
         state.error = action.payload
@@ -41,6 +41,10 @@ export const { fetchChatData, fetchChatDataSuccess, fetchChatDataFailure } = cha
 
 export default chatDataSlice.reducer;
 
-export const getChatReponse = (state: RootState) => state.chatData.chatResponse
-export const selectStatus = (state: RootState) => state.chatData.chatDataState
+export const getChatReponse = (state: RootState) => state.chatData.chatResponse;
+export const selectStatus = (state: RootState) => state.chatData.chatDataState;
+export const selectChatReponse = createSelector(
+  (state:RootState) => state.chatData.chatResponse,
+  (chatResponse) => chatResponse
+);
 

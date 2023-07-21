@@ -23,7 +23,7 @@ const AppLoadingScreen = (): React.ReactElement => {
 
     return (
         <View style={styles.page}>
-            <Text>loading User Data...</Text>
+            <Text style={styles.chatTextStyle}>loading User Data...</Text>
         </View>
     )
 }
@@ -34,6 +34,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#2C5364',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    chatTextStyle: {
+        fontFamily: 'Roboto-Light', 
+        fontSize: 15,
+        color:'white'
     },
 })
 

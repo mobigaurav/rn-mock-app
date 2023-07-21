@@ -37,6 +37,10 @@ export const styles = StyleSheet.create({
         color: "#fff",
         fontWeight: "600",
     },
+    chatTextStyle: {
+        fontFamily: 'Roboto-Light', 
+        fontSize: 15
+    },
     chatscreen: {
         backgroundColor: "#F7F7F7",
         flex: 1,
@@ -74,6 +78,12 @@ export const styles = StyleSheet.create({
     chatemptyText: { fontWeight: "bold", fontSize: 24, paddingBottom: 30 },
     messagingscreen: {
         flex: 1,
+    },
+    keyBoardContainer: {
+        flex: 1,
+        backgroundColor: 'green',
+        position: 'absolute',
+        bottom: 0,
     },
     messaginginputContainer: {
         width: "100%",
@@ -144,11 +154,12 @@ export const styles = StyleSheet.create({
         marginBottom: 15,
     },
     mmessage: {
-        maxWidth: "50%",
+        maxWidth: "100%",
         backgroundColor: "#f5ccc2",
         padding: 15,
         borderRadius: 10,
         marginBottom: 2,
+        flexShrink:1
     },
     mvatar: {
         marginRight: 5,

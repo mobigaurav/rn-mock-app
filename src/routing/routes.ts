@@ -19,8 +19,8 @@ export enum MainRoutes {
 }
 
 export enum HomeRoutes {
-    HomeA = 'Home Section A', // demo A for nesting
-    HomeB = 'Home Section B', // demo B for nesting
+    HomeA = 'ChatBot', // demo A for nesting
+    HomeB = 'ImageBot', // demo B for nesting
     HomeC = 'Home Section C', // demo C for nesting
 }
 

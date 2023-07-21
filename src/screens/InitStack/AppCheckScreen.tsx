@@ -6,6 +6,7 @@ import { MainRoutes } from '../../routing/routes'
 import { useReduxSelector } from '../../redux'
 import { selectLogin } from '../../redux/ducks/user'
 
+
 type AppCheckScreenProps = {
     navigation: MainNavigationProp<MainRoutes.AppCheck>
 }
@@ -27,7 +28,7 @@ const AppCheckScreen = ({ navigation }: AppCheckScreenProps): React.ReactElement
 
     return (
         <View style={styles.page}>
-            <Text>loading App Data...</Text>
+            <Text style={styles.chatTextStyle}>loading App Data...</Text>
         </View>
     )
 }
@@ -38,6 +39,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#2C5364',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    chatTextStyle: {
+        fontFamily: 'Roboto-Light', 
+        fontSize: 15,
+        color:'white'
     },
 })
 

@@ -9,5 +9,5 @@ export async function fetchUserData(): Promise<[]> {
 }
 
 export async function fetchChatData(question: string): Promise<chatResponse> {
-  return await axios.post("http://127.0.0.1:5000/ask", {question: question});
+  return await axios.post("https://fd79-45-37-234-182.ngrok-free.app/ask", {question: question});
 }
